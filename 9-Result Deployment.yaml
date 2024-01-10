@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+      - name: result
+        image: cracker786/result-app2
+        ports:
+        - containerPort: 80
+          name: result
+        envFrom:
+        - configMapRef:
+            name: postgres-config
